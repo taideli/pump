@@ -3,6 +3,10 @@ package com.tdl.study.pump.core;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static com.tdl.study.pump.core.parallel.Parals.eachs;
+import static com.tdl.study.pump.core.utils.Streams.list;
+import static com.tdl.study.pump.core.utils.Streams.spatialMap;
+
 public interface Input<V> extends IO, Dequeue<V>, Supplier<V>, Iterable<V> {
     static Input<?> NULL = (using, batchSize) -> 0;
 

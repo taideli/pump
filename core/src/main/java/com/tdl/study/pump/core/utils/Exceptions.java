@@ -30,9 +30,19 @@ public class Exceptions {
         return Reflections.construct(expect, ex);
     }
 
+    @SuppressWarnings("unchecked")
+    public static <T extends Exception> T wrap(Throwable ex, Class<T> expect, String msg) {
+        if (null == msg) return wrap(ex, expect);
+        ex = unwrap(ex);
+        if (expect.isAssignableFrom(ex.getClass())) return (T) ex;
+        return Reflections.construct(expect, msg, ex);
+    }
+
     public static Throwable unwrap(Throwable ex) {
         if (null == ex) return null;
         METHODS_LOCK.readLock().lock();
+        // TODO method is not finished, fix it
+        return ex;
     }
 
     public interface Code {
